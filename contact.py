@@ -3,14 +3,7 @@ import csv
 
 
 def main():
-    all_ehouse = []
-    on_floor = []
-    alumni = []
-
-
-    load(all_ehouse, './files/eHouse-contact.csv')
-
-    print()
+    all_ehouse = load('./files/eHouse-contact.csv')
     on_floor = gen_with_years('On Floor', (19, 19), all_ehouse)
     alumni = gen_with_years('Alumni', (16, 18), all_ehouse)
 
@@ -31,12 +24,14 @@ def gen_with_years(list_name, year_range, total_list):
     return output_list
 
 
-def load(outputList, filename):
+def load(filename):
+    output_list = []
     with open(filename, 'r') as infile:
         reader = csv.DictReader(infile)
         for row in reader:
             if row['First Name'] != '':
-                outputList.append(row)
+                output_list.append(row)
+    return output_list
 
 
 def write(inputDicts, filename):
