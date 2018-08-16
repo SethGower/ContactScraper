@@ -7,16 +7,8 @@ def main():
     on_floor = []
     alumni = []
 
-    alumni_years = [('16', '17'), ('16', '18'), ('17', '18'),
-                    ('15', '16'), ('15', '17'), ('14', '15'), ('14', '16')]
 
     load(all_ehouse, './files/eHouse-contact.csv')
-    # print('Creating on_floor list')
-    # for person in all_ehouse:
-    #    if '19' in person['Years Lived on Engineering House'] and person['First Name'] != '':
-    #        print('Adding', person['First Name'],
-    #              person['Last Name'], 'to on_floor')
-    #        on_floor.append(person)
 
     print()
     on_floor = gen_with_years('On Floor', (19, 19), all_ehouse)
