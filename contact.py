@@ -11,31 +11,32 @@ def main():
                     ('15', '16'), ('15', '17'), ('14', '15'), ('14', '16')]
 
     load(all_ehouse, './files/eHouse-contact.csv')
-    print('Creating on_floor list')
-    for person in all_ehouse:
-        if '19' in person['Years Lived on Engineering House'] and person['First Name'] != '':
-            print('Adding', person['First Name'],
-                  person['Last Name'], 'to on_floor')
-            on_floor.append(person)
+    # print('Creating on_floor list')
+    # for person in all_ehouse:
+    #    if '19' in person['Years Lived on Engineering House'] and person['First Name'] != '':
+    #        print('Adding', person['First Name'],
+    #              person['Last Name'], 'to on_floor')
+    #        on_floor.append(person)
 
     print()
+    on_floor = gen_with_years('On Floor', (19, 19), all_ehouse)
+    alumni = gen_with_years('Alumni', (16, 18), all_ehouse)
 
-    alumni = gen_alums((15, 18), all_ehouse, on_floor)
     print('Writing CSV files')
     write(all_ehouse, './files/all_ehouse.csv')
     write(alumni, './files/alumni.csv')
     write(on_floor, './files/on_floor.csv')
 
 
-def gen_alums(year_range, total_list, on_floor):
-    alumni_list = []
+def gen_with_years(list_name, year_range, total_list):
+    output_list = []
+
     for person in total_list:
-        print('Checking', person['First Name'], person['Last Name'])
-        if int(person['Years Lived on Engineering House'][-2:]) in range(year_range[0], year_range[1]+1) and person not in on_floor:
-            alumni_list.append(person)
+        if int(person['Years Lived on Engineering House'][-2:]) in range(year_range[0], year_range[1]+1):
+            output_list.append(person)
             print('Adding', person['First Name'],
-                  person['Last Name'], 'to Alumni List')
-    return alumni_list
+                  person['Last Name'], person['Years Lived on Engineering House'], 'to', list_name)
+    return output_list
 
 
 def load(outputList, filename):
