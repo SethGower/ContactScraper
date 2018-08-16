@@ -20,7 +20,7 @@ def gen_with_years(list_name, year_range, total_list):
         if int(person['Years Lived on Engineering House'][-2:]) in range(year_range[0], year_range[1]+1):
             output_list.append(person)
             print('Adding', person['First Name'],
-                  person['Last Name'], person['Years Lived on Engineering House'], 'to', list_name)
+                  person['Last Name'], person['Years Lived on Engineering House'], 'to', list_name, 'list')
     return output_list
 
 
